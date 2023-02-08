@@ -40,6 +40,7 @@ const server = express()
 server.use(cors())
 server.use(express.json())
 
+mongoose.connect(process.env.MONGO_CON_URL)
 mongoose.connection.on("connected", () => {
   console.log("Successfully connected to MongoDB!")
 
@@ -57,5 +58,3 @@ server.use("/api/files", filesRouter)
 server.use(badRequestHandler)
 server.use(notFoundHandler)
 server.use(genericErrorHandler)
-
-mongoose.connect(process.env.MONGO_CON_URL)
